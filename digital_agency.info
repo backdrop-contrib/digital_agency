@@ -1,6 +1,7 @@
 type = module
 name = Digital Agency
 description = This is a package of recipes and content used to generate a quick start on a website for a digital agency.
+package = Recipes
 backdrop = 1.x
 
 ; Link to the module's configuration page.
@@ -15,6 +16,5 @@ dependencies[] = services_recipe
 dependencies[] = faq_recipe
 dependencies[] = testimonial_recipe
 
-; Find suggested packages and tags at: https://docs.backdropcms.org/documentation/module-packages-and-tags
-package = User interface
+; Find suggested tags at: https://docs.backdropcms.org/documentation/module-packages-and-tags
 tags[] = Recipes
