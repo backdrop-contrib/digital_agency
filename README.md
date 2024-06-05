@@ -1,6 +1,3 @@
-Digital Agency Package
-----------------------
-
 The Digital Agency Package is a collection of features and configuration tailored to 
 meet the needs of a digital agency, artist, or other organization that provides various
 services that need to be showcased on their website and requires a portfolio.
