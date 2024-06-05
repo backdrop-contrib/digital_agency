@@ -13,7 +13,7 @@ scripts[] = js/digital_agency.js
 ; List any dependencies here.
 dependencies[] = services_recipe
 dependencies[] = faq_recipe
-dependencies[] = testimonials_recipe
+dependencies[] = testimonial_recipe
 
 ; Find suggested packages and tags at: https://docs.backdropcms.org/documentation/module-packages-and-tags
 package = User interface

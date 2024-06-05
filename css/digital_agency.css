@@ -1,0 +1,15 @@
+/**
+ * @file
+ * Custom CSS for the Digital Agency package.
+ */
+
+.view .views-view-grid-cols-3 {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 48em) {
+  .view .views-view-grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
