@@ -15,6 +15,7 @@ scripts[] = js/digital_agency.js
 dependencies[] = services_recipe
 dependencies[] = faq_recipe
 dependencies[] = testimonial_recipe
+dependencies[] = portfolio_projects_recipe
 
 ; Find suggested tags at: https://docs.backdropcms.org/documentation/module-packages-and-tags
 tags[] = Recipes
