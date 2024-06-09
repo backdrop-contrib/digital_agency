@@ -23,6 +23,7 @@
 
 	  config_set('layout.layout.home', 'content.9bd5a524-3670-4922-8b12-18b00a2858b9.data.settings.block_settings.menu', 'main-menu');
 	  config_set('layout.layout.default', 'content.84c43df4-1165-4faf-8700-c362a7153c0b.data.settings.block_settings.menu', 'main-menu');
+	  config_set('layout.layout.default', 'layout_template', 'boxton');
 	  config_set('layout.layout.services', 'content.7a914d95-dd2b-4c5b-9334-52a024a529ae.data.settings.block_settings.menu', 'main-menu');
 	  config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.title', 'Digital Agency Website');
 

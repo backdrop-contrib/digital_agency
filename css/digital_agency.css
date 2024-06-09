@@ -3,14 +3,39 @@
  * Custom CSS for the Digital Agency package.
  */
 
-.view .views-view-grid-cols-3 {
+.view .views-view-grid {
+  gap: 2rem;
+}
+
+.view .views-view-grid-cols-2,
+.view .views-view-grid-cols-3,
+.view .views-view-grid-cols-4,
+.view .views-view-grid-cols-5,
+.view .views-view-grid-cols-6 {
   grid-template-columns: repeat(1, 1fr);
 }
 
 @media (min-width: 48em) {
+  .view .views-view-grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .view .views-view-grid-cols-3 {
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+  }
+  .view .views-view-grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .view .views-view-grid-cols-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .view .views-view-grid-cols-6 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 68em) {
+  .view .views-view-grid-cols-6 {
+    grid-template-columns: repeat(6, 1fr);
   }
 }
 
