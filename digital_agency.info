@@ -12,10 +12,12 @@ stylesheets[all][] = css/digital_agency.css
 scripts[] = js/digital_agency.js
 
 ; List any dependencies here.
+dependencies[] = contact_us_webform_recipe
 dependencies[] = services_recipe
 dependencies[] = faq_recipe
 dependencies[] = testimonial_recipe
 dependencies[] = portfolio_projects_recipe
+
 
 ; Find suggested tags at: https://docs.backdropcms.org/documentation/module-packages-and-tags
 tags[] = Recipes
