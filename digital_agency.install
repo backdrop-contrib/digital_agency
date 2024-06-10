@@ -21,6 +21,7 @@
 	  $default_layout->removeBlock('268e9eab-a34e-4364-ba03-034e97e02ac7');
 	  $default_layout->save();
 
+	  config_set('system.core', 'site_name', 'My Digital Agency');
 	  config_set('layout.layout.home', 'content.9bd5a524-3670-4922-8b12-18b00a2858b9.data.settings.block_settings.menu', 'main-menu');
 	  config_set('layout.layout.default', 'content.84c43df4-1165-4faf-8700-c362a7153c0b.data.settings.block_settings.menu', 'main-menu');
 	  config_set('layout.layout.default', 'layout_template', 'boxton');
