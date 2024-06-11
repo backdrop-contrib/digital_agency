@@ -43,3 +43,8 @@
   border:  1px solid black;
   margin-bottom:  1rem;
 }
+
+.block-layout-hero.block-hero {
+  color: white;
+  min-height: 70vh;
+}
