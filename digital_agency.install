@@ -1,31 +1,46 @@
 <?php
 
-	function digital_agency_install() {
-		$home_layout = layout_load('home');
-		//Remove Primary Menu Block
-	  $home_layout->removeBlock('9aece1df-ac4f-44a6-8b0c-12a7f6a1fb21');
-	  // Remove Promoted Cards Block
-	  $home_layout->removeBlock('fe8c7715-c7e9-46d0-8b09-09afb78b2891');
-	  // Remove Promoted Content Block
-	  $home_layout->removeBlock('578243cf-a4c8-46ad-9504-04aaf4ec9ccc');
-	  $home_layout->addBlock('views', 'promoted-block', 'bottom');
-	  $home_layout->save();
+  function digital_agency_install() {
+    $home_layout = layout_load('home');
+    //Remove Primary Menu Block
+    $home_layout->removeBlock('9aece1df-ac4f-44a6-8b0c-12a7f6a1fb21');
+    // Remove Promoted Cards Block
+    $home_layout->removeBlock('fe8c7715-c7e9-46d0-8b09-09afb78b2891');
+    // Remove Promoted Content Block
+    $home_layout->removeBlock('578243cf-a4c8-46ad-9504-04aaf4ec9ccc');
+    $home_layout->addBlock('views', 'promoted-block', 'bottom');
+    $home_layout->save();
 
-		$default_layout = layout_load('default');
-		//Remove Primary Menu Block
-	  $default_layout->removeBlock('13b2f325-af26-40bb-8c61-97fe1d93f19f');
-	  $default_layout->save();
+    $default_layout = layout_load('default');
+    //Remove Primary Menu Block
+    $default_layout->removeBlock('13b2f325-af26-40bb-8c61-97fe1d93f19f');
+    $default_layout->save();
 
-		$default_layout = layout_load('services');
-		//Remove Primary Menu Block
-	  $default_layout->removeBlock('268e9eab-a34e-4364-ba03-034e97e02ac7');
-	  $default_layout->save();
+    $default_layout = layout_load('services');
+    //Remove Primary Menu Block
+    $default_layout->removeBlock('268e9eab-a34e-4364-ba03-034e97e02ac7');
+    $default_layout->save();
 
-	  config_set('system.core', 'site_name', 'My Digital Agency');
-	  config_set('layout.layout.home', 'content.9bd5a524-3670-4922-8b12-18b00a2858b9.data.settings.block_settings.menu', 'main-menu');
-	  config_set('layout.layout.default', 'content.84c43df4-1165-4faf-8700-c362a7153c0b.data.settings.block_settings.menu', 'main-menu');
-	  config_set('layout.layout.default', 'layout_template', 'boxton');
-	  config_set('layout.layout.services', 'content.7a914d95-dd2b-4c5b-9334-52a024a529ae.data.settings.block_settings.menu', 'main-menu');
-	  config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.title', 'Digital Agency Website');
+    // Prepping new image to use in hero block of front page.
+    $module_path = backdrop_get_path('module', 'digital_agency');
+    $field_image_dir = 'public://hero';
+    file_prepare_directory($field_image_dir, FILE_CREATE_DIRECTORY);
+    $image_url = BACKDROP_ROOT . '/' . $module_path . '/images/flamingo-background.webp';
+    $moved_file = file_unmanaged_copy($image_url, $field_image_dir);
 
-	}
+    $file = entity_create('file', array(
+      'filename' => 'flamingo-background.webp',
+      'uri' => $moved_file,
+      'uid' => 1,
+    ));
+    $file->save();
+
+    config_set('system.core', 'site_name', 'My Digital Agency');
+    config_set('layout.layout.home', 'content.9bd5a524-3670-4922-8b12-18b00a2858b9.data.settings.block_settings.menu', 'main-menu');
+    config_set('layout.layout.default', 'content.84c43df4-1165-4faf-8700-c362a7153c0b.data.settings.block_settings.menu', 'main-menu');
+    config_set('layout.layout.default', 'layout_template', 'boxton');
+    config_set('layout.layout.services', 'content.7a914d95-dd2b-4c5b-9334-52a024a529ae.data.settings.block_settings.menu', 'main-menu');
+    // Changing text and image in front page hero block.
+    config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.title', 'Digital Agency Website');
+    config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.image_path', '/files/hero/flamingo-background.webp');
+  }
