@@ -1,0 +1,132 @@
+{
+    "_config_name": "layout.mini_layouts.footer_mini_layout",
+    "path": null,
+    "name": "footer_mini_layout",
+    "block_title": "Footer block",
+    "title": "Footer Mini Layout",
+    "description": "mini layout for the footer.",
+    "renderer_name": "standard",
+    "module": "mini_layouts",
+    "weight": 0,
+    "storage": 2,
+    "layout_template": "mini_three_three_three",
+    "disabled": false,
+    "settings": {
+        "title": "",
+        "title_display": "none",
+        "title_block": null
+    },
+    "positions": {
+        "07908e9d-dd00-4f14-9500-ab35a8359a08--0": [
+            "b31fd98a-4394-415e-aa00-a123ac1a1f2d"
+        ],
+        "07908e9d-dd00-4f14-9500-ab35a8359a08--1": [
+            "9ee202a0-5133-4a0e-ba08-8fd22a39f745"
+        ],
+        "07908e9d-dd00-4f14-9500-ab35a8359a08--2": [
+            "e6a08c9e-c952-4300-9001-1f965050130e"
+        ],
+        "779caf18-1910-4abf-970b-11f53be4fb83--0": [],
+        "779caf18-1910-4abf-970b-11f53be4fb83--1": [],
+        "779caf18-1910-4abf-970b-11f53be4fb83--2": [],
+        "7aa5733b-eb36-42c1-9800-0bd38c870a1b--0": [],
+        "7aa5733b-eb36-42c1-9800-0bd38c870a1b--1": [],
+        "7aa5733b-eb36-42c1-9800-0bd38c870a1b--2": [],
+        "title": []
+    },
+    "contexts": [],
+    "relationships": [],
+    "content": {
+        "b31fd98a-4394-415e-aa00-a123ac1a1f2d": {
+            "plugin": "system:header",
+            "data": {
+                "status": 1,
+                "module": "system",
+                "delta": "header",
+                "settings": {
+                    "title_display": "none",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": {
+                        "menu": "",
+                        "logo": 1,
+                        "site_name": 1,
+                        "site_slogan": 0
+                    },
+                    "contexts": [],
+                    "admin_label": "",
+                    "admin_description": ""
+                },
+                "uuid": "b31fd98a-4394-415e-aa00-a123ac1a1f2d",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "9ee202a0-5133-4a0e-ba08-8fd22a39f745": {
+            "plugin": "nice_menus:1",
+            "data": {
+                "status": 1,
+                "module": "nice_menus",
+                "delta": "1",
+                "settings": {
+                    "title_display": "none",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": {
+                        "nice_menus_name_1": "Nice menu 1",
+                        "nice_menus_menu_1": "main-menu:0",
+                        "nice_menus_depth_1": "0",
+                        "nice_menus_type_1": "right",
+                        "nice_menus_respect_expand_1": "0"
+                    },
+                    "contexts": [],
+                    "admin_label": "",
+                    "admin_description": ""
+                },
+                "uuid": "9ee202a0-5133-4a0e-ba08-8fd22a39f745",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        },
+        "e6a08c9e-c952-4300-9001-1f965050130e": {
+            "plugin": "layout:custom_block",
+            "data": {
+                "status": 1,
+                "module": "layout",
+                "delta": "custom_block",
+                "settings": {
+                    "title_display": "default",
+                    "title": "",
+                    "style": "default",
+                    "block_settings": [],
+                    "contexts": [],
+                    "content": "<p>\r\n    Edit these footer blocks in&nbsp;<br>\r\n    * structure &gt; mini layouts &gt; footer block.\r\n</p>",
+                    "format": "filtered_html",
+                    "admin_label": "Social Media Block",
+                    "admin_description": ""
+                },
+                "uuid": "e6a08c9e-c952-4300-9001-1f965050130e",
+                "style": {
+                    "plugin": "default",
+                    "data": {
+                        "settings": {
+                            "classes": ""
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

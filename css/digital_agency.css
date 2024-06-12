@@ -48,3 +48,23 @@
   color: white;
   min-height: 70vh;
 }
+
+/* Mini Layout in footer */
+
+.l-footer .block-mini-layouts-footer-mini-layout {
+    line-height: 1.7;
+}
+
+.l-footer .block-mini-layouts-footer-mini-layout ul.nice-menu {
+    margin-top: 20px;
+    border-top: none;
+}
+
+.block-mini-layouts-footer-mini-layout ul.nice-menu li {
+    border: none;
+    background-color: white;
+}
+
+.block-mini-layouts-footer-mini-layout ul.nice-menu li a {
+    padding: 0.3em 5px 0.3em 5px;
+}
