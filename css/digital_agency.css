@@ -68,3 +68,12 @@
 .block-mini-layouts-footer-mini-layout ul.nice-menu li a {
     padding: 0.3em 5px 0.3em 5px;
 }
+
+/* Testimonials Recipe  */
+.view-testimonials img {
+  display: block;
+  max-width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+}
