@@ -1,3 +1,6 @@
+Discussion and issues currently taking place in Zeever issue queue. 
+https://github.com/backdrop-contrib/zeever/issues
+
 The Digital Agency Package is a collection of features and configuration tailored to 
 meet the needs of a digital agency, artist, or other organization that provides various
 services that need to be showcased on their website and requires a portfolio.
@@ -9,11 +12,6 @@ This project was conceived as a package of content and configuration to be suppo
 by the [Zeever theme](https://github.com/backdrop-contrib/zeever/wiki). The Zeever theme is being developed with this package of content
 and configuration in mind. However, we choose a different name for this project to 
 reflect the fact, that more than one theme might choose to support this package.
-
-At this stage, we're discussing this package of content and configuration in the Zeever
-issue queue, because of our development process. This is a temporary workflow, until 
-we launch the Zeever theme. 
-https://github.com/backdrop-contrib/zeever/issues
 
 Requirements
 ------------
