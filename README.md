@@ -6,14 +6,14 @@ This package is the glue that pulls together and binds several existing recipes 
 will create content types, views, and content. 
 
 This project was conceived as a package of content and configuration to be supported
-by the [Zeever theme](https://github.com/stpaultim/zeever/wiki). The Zeever theme is being developed with this package of content
+by the [Zeever theme](https://github.com/backdrop-contrib/zeever/wiki). The Zeever theme is being developed with this package of content
 and configuration in mind. However, we choose a different name for this project to 
 reflect the fact, that more than one theme might choose to support this package.
 
 At this stage, we're discussing this package of content and configuration in the Zeever
 issue queue, because of our development process. This is a temporary workflow, until 
 we launch the Zeever theme. 
-https://github.com/stpaultim/zeever/issues
+https://github.com/backdrop-contrib/zeever/issues
 
 Requirements
 ------------
