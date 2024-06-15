@@ -15,8 +15,11 @@ scripts[] = js/digital_agency.js
 dependencies[] = mini_layouts
 dependencies[] = nice_menus
 dependencies[] = contact_us_webform_recipe
+dependencies[] = services_recipe
 dependencies[] = services_recipe:services_sample_content
+dependencies[] = faq_recipe
 dependencies[] = faq_recipe:faq_sample_content
+dependencies[] = portfolio_projects_recipe
 dependencies[] = portfolio_projects_recipe:portfolio_projects_sample_content
 dependencies[] = testimonial_recipe
 
