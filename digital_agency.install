@@ -1,6 +1,114 @@
 <?php
 
   function digital_agency_install() {
+
+    // Prepping images for news block
+    $field_image_dir = 'public://news';
+    file_prepare_directory($field_image_dir, FILE_CREATE_DIRECTORY);
+
+    $news_image = array(
+      'zeever-logo-chatgpt.webp',
+      'zeever-open-source-chatgpt.webp',
+      'first-post-chatgpt.webp',
+    );
+
+    $fids = [];
+
+    foreach ($news_image as $image_filename) {
+      $image_url = BACKDROP_ROOT . '/' . backdrop_get_path('module', 'digital_agency') . '/' . 'images/'. $image_filename;
+      $moved_file = file_unmanaged_copy($image_url, $field_image_dir);
+
+      $file = entity_create('file', array(
+        'filename' => $image_filename,
+        'uri' => $moved_file,
+        'uid' => 1,
+      ));
+
+      $file->save();
+      $fids[] = $file->fid;
+    }
+
+    // Create a second default post to display on front page.
+    $post = new Node(
+      array(
+        'title' => st('Zeever: A new kind of theme.'),
+        'body' => array(
+          LANGUAGE_NONE => array(
+            array(
+              'value' => '<p>' . st('Introducing Zeever, the ultimate Backdrop CMS theme designed specifically for digital agencies. AgencyPrime combines sleek, modern aesthetics with powerful functionality, offering a responsive and customizable framework that highlights your creative portfolio, services, and client successes. Built with performance and flexibility in mind, this theme ensures your agency stands out with stunning visuals, intuitive navigation, and seamless integration of the latest web technologies. Elevate your digital presence and captivate your audience with AgencyPrime – where innovation meets design excellence.') . '</p>',
+              'format' => 'filtered_html',
+            ),
+          ),
+        ),
+        'field_image' => array(
+          LANGUAGE_NONE => array(
+            array(
+              'fid' => $fids[0],
+            ),
+          ),
+        ),
+        'uid' => 1,
+        'status' => 1,
+        'promote' => 1,
+        'type' => 'post',
+      )
+    );
+    $post->save();
+
+    // Create a third default post to display on front page.
+    $post = new Node(
+      array(
+        'title' => st('Zeever is Open Source.'),
+        'body' => array(
+          LANGUAGE_NONE => array(
+            array(
+              'value' => '<p>' . st('Open source software is crucial because it fosters innovation, collaboration, and transparency. By allowing anyone to access, modify, and distribute the source code, open source projects empower developers to customize and improve software to meet specific needs. This collaborative approach accelerates technological advancements, reduces costs, and enhances security through community-driven reviews and contributions. Additionally, open source promotes knowledge sharing and inclusivity, enabling a diverse range of voices to participate in the software development process. Ultimately, open source software builds a foundation for a more open, equitable, and sustainable digital future.') . '</p>',
+              'format' => 'filtered_html',
+            ),
+          ),
+        ),
+        'field_image' => array(
+          LANGUAGE_NONE => array(
+            array(
+              'fid' => $fids[1],
+            ),
+          ),
+        ),
+        'uid' => 1,
+        'status' => 1,
+        'promote' => 1,
+        'type' => 'post',
+      )
+    );
+    $post->save();
+
+    // Create a fourth default post to display on front page.
+    $post = new Node(
+      array(
+        'title' => st('Gettings Started'),
+        'body' => array(
+          LANGUAGE_NONE => array(
+            array(
+              'value' => '<p>' . st("Embarking on your journey with Zeever, the innovative Backdrop CMS theme designed for digital agencies, is an exciting step towards elevating your digital presence. Begin by downloading and installing Zeever from the Backdrop CMS repository. Once installed, explore the theme's intuitive customization options that allow you to tailor the design to reflect your agency's unique style and branding. Utilize the built-in layouts and flexible grid system to create stunning, responsive pages that captivate your audience. Zeever's seamless integration with Backdrop CMS ensures a smooth setup, enabling you to quickly showcase your portfolio, services, and client testimonials. Whether you're a seasoned developer or new to web design, Zeever provides the tools and flexibility needed to create a professional, engaging website that stands out in the digital landscape. Dive into the documentation and community support to make the most of Zeever's features and start building a digital experience that drives success for your agency.") . '</p>',
+              'format' => 'filtered_html',
+            ),
+          ),
+        ),
+        'field_image' => array(
+          LANGUAGE_NONE => array(
+            array(
+              'fid' => $fids[2],
+            ),
+          ),
+        ),
+        'uid' => 1,
+        'status' => 1,
+        'promote' => 1,
+        'type' => 'post',
+      )
+    );
+    $post->save();
+
     $home_layout = layout_load('home');
     //Remove Primary Menu Block
     $home_layout->removeBlock('9aece1df-ac4f-44a6-8b0c-12a7f6a1fb21');
@@ -9,7 +117,7 @@
     // Remove Promoted Content Block
     $home_layout->removeBlock('578243cf-a4c8-46ad-9504-04aaf4ec9ccc');
 
-    $home_layout->addBlock('views', 'promoted-block', 'bottom');
+    $home_layout->addBlock('views', 'news_block-block', 'bottom');
     $home_block = $home_layout->addBlock('mini_layouts', 'footer_mini_layout', 'footer');
 
     foreach ($home_layout->content as $block_id => $block_info) {
@@ -64,10 +172,14 @@
     config_set('nice_menus.settings', 'nice_menus_menu_1', 'main-menu:0');
     config_set('nice_menus.settings', 'nice_menus_depth_1', '0');
 
+    // Changing 'published on' date format for posts.
+    config_set('node.type.post', 'settings.node_submitted_format', 'By [node:author], [node:created:date_only]');
 
     // Adding mini-layout to footer of available layouts.
     config_set('layout.layout.projects', 'content.' . $projects_block->uuid . '.data.settings.title_display', 'none');
     config_set('layout.layout.default', 'content.' . $default_block->uuid . '.data.settings.title_display', 'none');
     config_set('layout.layout.home', 'content.' . $home_block->uuid . '.data.settings.title_display', 'none');
     config_set('layout.layout.services', 'content.' . $services_block->uuid . '.data.settings.title_display', 'none');
+
+
   }
