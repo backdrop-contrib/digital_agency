@@ -77,3 +77,22 @@
   margin-right: auto;
   border: 1px solid black;
 }
+
+/* Portfolio Projects */
+
+@media (min-width: 38em) {
+  .block-views-portfolio-projects-block .block-title {
+    width: 50%;
+    float: left;
+  }
+
+  .block-views-portfolio-projects-block .view-header {
+    width: 50%;
+    text-align: right;
+    float: right;
+  }
+
+  .block-views-portfolio-projects-block .views-view-grid {
+    clear: both;
+  }
+}
