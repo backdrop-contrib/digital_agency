@@ -22,11 +22,7 @@ dependencies[] = faq_recipe:faq_sample_content
 dependencies[] = portfolio_projects_recipe
 dependencies[] = portfolio_projects_recipe:portfolio_projects_sample_content
 dependencies[] = testimonial_recipe
+dependencies[] = testimonial_recipe:testimonial_sample_content
 
 ; Find suggested tags at: https://docs.backdropcms.org/documentation/module-packages-and-tags
 tags[] = Recipes
-
-; Added by Backdrop CMS packaging script on 2024-06-19
-project = digital_agency
-version = 1.x-1.0.0-beta12
-timestamp = 1718858408

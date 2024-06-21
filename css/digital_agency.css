@@ -78,6 +78,30 @@
   border: 1px solid black;
 }
 
+.view-testimonials .views-field-body p {
+  font-style: italic;
+}
+
+.view-testimonials .views-field-body p:first-child:before {
+  content: open-quote;
+}
+
+.view-testimonials .views-field-body p:last-child:after {
+  content: close-quote;
+}
+
+.view-testimonials .views-field-field-testimonial-author div {
+  font-weight: 900;
+}
+
+.view-testimonials .views-field-field-testimonial-author div:before {
+  content: "-- ";
+}
+
+.view.view-testimonials .views-view-grid .views-grid-box {
+  border: none;
+}
+
 /* Portfolio Projects */
 
 @media (min-width: 38em) {
