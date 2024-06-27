@@ -119,16 +119,24 @@
     $home_layout->removeBlock('fe8c7715-c7e9-46d0-8b09-09afb78b2891');
     // Remove Promoted Content Block
     $home_layout->removeBlock('578243cf-a4c8-46ad-9504-04aaf4ec9ccc');
-
+    // Add a news block on bottom of front page
     $home_layout->addBlock('views', 'news_block-block', 'bottom');
+    // Add mini-layout to footer on front page, save block details to add block
+    // to other pages later.
     $home_block = $home_layout->addBlock('mini_layouts', 'footer_mini_layout', 'footer');
+    // Add "about" block and save block details to add additional config changes to block
+    // afterwards.
     $igb_block = $home_layout->addBlock('image_grid_block', 'about_block_with_images', 'bottom');   
     $home_layout->save();
-
     config_set('layout.layout.home', 'content.' . $igb_block->uuid . '.data.settings.label', 'About Block with Images');
     config_set('layout.layout.home', 'content.' . $igb_block->uuid . '.data.settings.machine_name', 'about_block_with_images');
     config_set('layout.layout.home', 'content.' . $igb_block->uuid . '.data.settings.title', 'About');
     config_set('layout.layout.home', 'content.' . $igb_block->uuid . '.data.settings.title_display', 'custom');
+
+    // Adding correct file id's to our about block.
+    config_set('image_grid_block.block.about_block_with_images', 'image_1', $fids[3]);
+    config_set('image_grid_block.block.about_block_with_images', 'image_2', $fids[4]);
+    config_set('image_grid_block.block.about_block_with_images', 'image_3', $fids[5]);
 
     // Remove portfolio block provided by recipe to add a different one.
     foreach ($home_layout->content as $block_id => $block_info) {
