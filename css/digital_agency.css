@@ -3,6 +3,16 @@
  * Custom CSS for the Digital Agency package.
  */
 
+a.button {
+  background-color: grey;
+  color:  black;
+}
+
+a.button:hover {
+  background-color: teal;
+  color: white;
+}
+
 .view .views-view-grid {
   gap: 2rem;
 }
