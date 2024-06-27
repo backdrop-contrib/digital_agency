@@ -1,0 +1,19 @@
+{
+    "_config_name": "image_grid_block.block.about_block_with_images",
+    "parent": "default",
+    "label": "About Block with Images",
+    "machine_name": "about_block_with_images",
+    "title": "About",
+    "content_1": "<p>\r\n    Who we are?\r\n</p>",
+    "content_2": "<p>\r\n    Office\r\n</p>",
+    "content_3": "<p>\r\n    Team Work\r\n</p>",
+    "link_1": "About [2]",
+    "link_2": "Freelance Photographer Portfolio [18]",
+    "link_3": "Tech Startup [15]",
+    "format": "filtered_html",
+    "highlighted_image": "one",
+    "image_1": "20",
+    "image_2": "21",
+    "image_3": "22",
+    "image_style": ""
+}

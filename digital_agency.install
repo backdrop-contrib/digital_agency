@@ -10,6 +10,9 @@
       'zeever-logo-chatgpt.webp',
       'zeever-open-source-chatgpt.webp',
       'first-post-chatgpt.webp',
+      'office-chatgpt.webp',
+      'philosophy-chatgpt.webp',
+      'teamwork-chatgpt.webp',
     );
 
     $fids = [];
@@ -119,16 +122,21 @@
 
     $home_layout->addBlock('views', 'news_block-block', 'bottom');
     $home_block = $home_layout->addBlock('mini_layouts', 'footer_mini_layout', 'footer');
+    $igb_block = $home_layout->addBlock('image_grid_block', 'about_block_with_images', 'bottom');   
+    $home_layout->save();
 
+    config_set('layout.layout.home', 'content.' . $igb_block->uuid . '.data.settings.label', 'About Block with Images');
+    config_set('layout.layout.home', 'content.' . $igb_block->uuid . '.data.settings.machine_name', 'about_block_with_images');
+    config_set('layout.layout.home', 'content.' . $igb_block->uuid . '.data.settings.title', 'About');
+    config_set('layout.layout.home', 'content.' . $igb_block->uuid . '.data.settings.title_display', 'custom');
+
+    // Remove portfolio block provided by recipe to add a different one.
     foreach ($home_layout->content as $block_id => $block_info) {
       if ($block_info->delta == 'portfolio_projects-block_1') {
         $home_layout->removeBlock($block_info->uuid);
       }
     }
-    
     $home_layout->addBlock('views', 'portfolio_projects-block', 'content');
-
-    $home_layout->save();
 
     $default_layout = layout_load('default');
     //Remove Primary Menu Block
@@ -180,6 +188,4 @@
     config_set('layout.layout.default', 'content.' . $default_block->uuid . '.data.settings.title_display', 'none');
     config_set('layout.layout.home', 'content.' . $home_block->uuid . '.data.settings.title_display', 'none');
     config_set('layout.layout.services', 'content.' . $services_block->uuid . '.data.settings.title_display', 'none');
-
-
   }
