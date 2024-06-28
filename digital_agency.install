@@ -31,6 +31,7 @@
       'zeever-logo-chatgpt.webp',
       'zeever-open-source-chatgpt.webp',
       'first-post-chatgpt.webp',
+      'simplo-dragon-chatgpt.webp',
       'office-chatgpt.webp',
       'philosophy-chatgpt.webp',
       'teamwork-chatgpt.webp',
@@ -67,8 +68,7 @@
         'type' => 'post',
         'promote' => '1',
         'fid' => $fids[1],
-        'tags' => array('BackdropCMS','Open Source','Zeever'),
-        'menu_parent' => 'about',
+        'tags' => array('Backdrop CMS','Open Source','Zeever'),
       ),
       'post_03' => array(
         'title' => st("Gettings Started"),
@@ -77,7 +77,14 @@
         'promote' => '1',
         'fid' => $fids[2],
         'tags' => array('User Experience','Open Source'),
-        'menu_parent' => 'about',
+      ),
+      'post_04' => array(
+        'title' => st("Visting Simplo"),
+        'body' => 'post_04',
+        'type' => 'post',
+        'promote' => '1',
+        'fid' => $fids[3],
+        'tags' => array('User Experience','Websites', 'Backdrop CMS'),
       ),
     );
 
@@ -154,6 +161,8 @@
     $home_layout->removeBlock('fe8c7715-c7e9-46d0-8b09-09afb78b2891');
     // Remove Promoted Content Block
     $home_layout->removeBlock('578243cf-a4c8-46ad-9504-04aaf4ec9ccc');
+    // Remove Powered By block and then replace it later. Change order of blocks.
+    $home_layout->removeBlock('d6903155-4ad7-46d3-9300-e628fd337f06');
     // Add a news block on bottom of front page
     $home_layout->addBlock('views', 'news_block-block', 'bottom');
     // Add mini-layout to footer on front page, save block details to add block
@@ -170,6 +179,7 @@
         $home_layout->removeBlock($block_info->uuid);
       }
     }
+    $home_layout->addBlock('system', 'powered-by', 'footer');
     $home_layout->addBlock('views', 'portfolio_projects-block', 'content');
 
     $home_layout->save();
@@ -186,19 +196,26 @@
     config_set('layout.layout.home', 'content.' . $iiv_block->uuid . '.data.settings.title_display', 'none');
 
     // Adding correct file id's to our about block.
-    config_set('image_grid_block.block.about_block_with_images', 'image_1', $fids[3]);
-    config_set('image_grid_block.block.about_block_with_images', 'image_2', $fids[4]);
-    config_set('image_grid_block.block.about_block_with_images', 'image_3', $fids[5]);
-    config_set('iivblock.block.faq_block', 'image', $fids[6]);
+    config_set('image_grid_block.block.about_block_with_images', 'image_1', $fids[4]);
+    config_set('image_grid_block.block.about_block_with_images', 'image_2', $fids[5]);
+    config_set('image_grid_block.block.about_block_with_images', 'image_3', $fids[6]);
+    config_set('iivblock.block.faq_block', 'image', $fids[7]);
 
     // Changes to Default Layout
 
     $default_layout = layout_load('default');
     //Remove Primary Menu Block
     $default_layout->removeBlock('13b2f325-af26-40bb-8c61-97fe1d93f19f');
+    // Remove Powered By block and then replace it later. Change order of blocks.
+    foreach ($default_layout->content as $block_id => $block_info) {
+      if ($block_info->delta == 'powered-by') {
+        $default_layout->removeBlock($block_info->uuid);
+      }
+    }
     $default_block = $default_layout->addBlock('mini_layouts', 'footer_mini_layout', 'footer');
     $default_layout->addBlock('views', 'testimonials-block_1', 'bottom');
     $igb2_block = $default_layout->addBlock('image_grid_block', 'about_block_on_about_page', 'bottom');
+    $default_layout->addBlock('system', 'powered-by', 'footer');
     $default_layout->save();
 
     config_set('layout.layout.default', 'content.' . $igb2_block->uuid . '.data.settings.label', 'About Block on About Page');
@@ -215,13 +232,18 @@
     $services_layout = layout_load('services');
     //Remove Primary Menu Block
     $services_layout->removeBlock('268e9eab-a34e-4364-ba03-034e97e02ac7');
+    $services_layout->removeBlock('9678bed0-2e71-4ec1-a907-7ec4480620b1');
     $services_block = $services_layout->addBlock('mini_layouts', 'footer_mini_layout', 'footer');
+    $services_layout->addBlock('system', 'powered-by', 'footer');
+
     $services_layout->save();
 
     // Changes to Projects Layout
 
     $project_layout = layout_load('projects');
+    $project_layout->removeBlock('dd4b5376-5919-4eea-ba2b-43dc3fad208e');
     $projects_block = $project_layout->addBlock('mini_layouts', 'footer_mini_layout', 'footer');
+    $project_layout->addBlock('system', 'powered-by', 'footer');
     $project_layout->save();
 
 
@@ -248,7 +270,7 @@
     // Changing text and image in front page hero block.
     config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.title', 'Digital Agency Website');
     config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.image_path', '/files/hero/flamingo-background.webp');
-    config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.image', $fids[7]);
+    config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.image', $fids[8]);
     config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.content', '<a class="button" href="/contact-us">Let\'s get started!</a>');
     config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.format', 'full_html');
 

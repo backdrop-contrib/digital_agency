@@ -72,7 +72,7 @@ a.button:hover {
 
 .block-mini-layouts-footer-mini-layout ul.nice-menu li {
     border: none;
-    background-color: white;
+    background: rgba(0,0,0,0);
 }
 
 .block-mini-layouts-footer-mini-layout ul.nice-menu li a {
@@ -165,6 +165,7 @@ a.button:hover {
   padding-bottom:  60px;
 }
 
+.field-block.block,
 .block.block-system-breadcrumb,
 .block.block-system-title-combo {
   padding: 0;
@@ -187,3 +188,11 @@ a.button:hover {
   background-color: grey;
   color: white;
 }
+
+.node.view-mode-teaser + .node.view-mode-teaser {
+  border-top: 1px solid black;
+  padding-top: 30px;
+  margin-top: 0;
+}
+
+

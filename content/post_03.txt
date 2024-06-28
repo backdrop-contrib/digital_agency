@@ -1,3 +1,6 @@
 <p>
-	Open source software is crucial because it fosters innovation, collaboration, and transparency. By allowing anyone to access, modify, and distribute the source code, open source projects empower developers to customize and improve software to meet specific needs. This collaborative approach accelerates technological advancements, reduces costs, and enhances security through community-driven reviews and contributions. Additionally, open source promotes knowledge sharing and inclusivity, enabling a diverse range of voices to participate in the software development process. Ultimately, open source software builds a foundation for a more open, equitable, and sustainable digital future.
+	Open source software is crucial because it fosters innovation, collaboration, and transparency. By allowing anyone to access, modify, and distribute the source code, open source projects empower developers to customize and improve software to meet specific needs. 
+</p>
+<p>
+	This collaborative approach accelerates technological advancements, reduces costs, and enhances security through community-driven reviews and contributions. Additionally, open source promotes knowledge sharing and inclusivity, enabling a diverse range of voices to participate in the software development process. Ultimately, open source software builds a foundation for a more open, equitable, and sustainable digital future.
 </p>

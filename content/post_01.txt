@@ -1,3 +1,6 @@
 <p>
-	Introducing Zeever, the ultimate Backdrop CMS theme designed specifically for digital agencies. AgencyPrime combines sleek, modern aesthetics with powerful functionality, offering a responsive and customizable framework that highlights your creative portfolio, services, and client successes. Built with performance and flexibility in mind, this theme ensures your agency stands out with stunning visuals, intuitive navigation, and seamless integration of the latest web technologies. Elevate your digital presence and captivate your audience with AgencyPrime – where innovation meets design excellence.
+	Introducing Zeever, the ultimate Backdrop CMS theme designed specifically for digital agencies. AgencyPrime combines sleek, modern aesthetics with powerful functionality, offering a responsive and customizable framework that highlights your creative portfolio, services, and client successes. 
+</p>
+<p>
+	Built with performance and flexibility in mind, this theme ensures your agency stands out with stunning visuals, intuitive navigation, and seamless integration of the latest web technologies. Elevate your digital presence and captivate your audience with AgencyPrime – where innovation meets design excellence.
 </p>
