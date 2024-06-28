@@ -3,14 +3,18 @@
  * Custom CSS for the Digital Agency package.
  */
 
+a {
+  color: teal;
+}
+
 a.button {
-  background-color: grey;
-  color:  black;
+  background-color: teal;
+  color: white;
 }
 
 a.button:hover {
-  background-color: teal;
-  color: white;
+  background-color: grey;
+  color:  black;
 }
 
 .view .views-view-grid {
