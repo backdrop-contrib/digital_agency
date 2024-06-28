@@ -2,10 +2,31 @@
 
   function digital_agency_install() {
 
+    $module_path = backdrop_get_path('module', 'digital_agency');
+
+
+    // Checking to see if "Your first post" node still exists
+    $query = new EntityFieldQuery();
+    $entities = $query->entityCondition('entity_type', 'node')
+      ->propertyCondition('type', 'post')
+      ->propertyCondition('title', 'Your first post!')
+      ->propertyCondition('status', 1)
+      ->range(0,1)
+      ->execute();
+
+    if (!empty($entities['node'])) {
+      $about = node_load(array_shift(array_keys($entities['node'])));
+    }
+    // If default post still exists, unpublish it.
+    if (!empty($about)) {
+      $post = node_load($about->nid);
+      $post->status = '0';
+      node_save($post);
+    }
+
     // Prepping images for news block
     $field_image_dir = 'public://news';
     file_prepare_directory($field_image_dir, FILE_CREATE_DIRECTORY);
-
     $news_image = array(
       'zeever-logo-chatgpt.webp',
       'zeever-open-source-chatgpt.webp',
@@ -13,12 +34,12 @@
       'office-chatgpt.webp',
       'philosophy-chatgpt.webp',
       'teamwork-chatgpt.webp',
+      'faq-chatgpt.webp',
     );
-
     $fids = [];
 
     foreach ($news_image as $image_filename) {
-      $image_url = BACKDROP_ROOT . '/' . backdrop_get_path('module', 'digital_agency') . '/' . 'images/'. $image_filename;
+      $image_url = BACKDROP_ROOT . '/' . $module_path . '/' . 'images/'. $image_filename;
       $moved_file = file_unmanaged_copy($image_url, $field_image_dir);
 
       $file = entity_create('file', array(
@@ -31,86 +52,100 @@
       $fids[] = $file->fid;
     }
 
-    // Create a second default post to display on front page.
-    $post = new Node(
-      array(
+    $posts = array(
+      'post_01' => array(
         'title' => st('Zeever: A new kind of theme.'),
-        'body' => array(
-          LANGUAGE_NONE => array(
-            array(
-              'value' => '<p>' . st('Introducing Zeever, the ultimate Backdrop CMS theme designed specifically for digital agencies. AgencyPrime combines sleek, modern aesthetics with powerful functionality, offering a responsive and customizable framework that highlights your creative portfolio, services, and client successes. Built with performance and flexibility in mind, this theme ensures your agency stands out with stunning visuals, intuitive navigation, and seamless integration of the latest web technologies. Elevate your digital presence and captivate your audience with AgencyPrime – where innovation meets design excellence.') . '</p>',
-              'format' => 'filtered_html',
-            ),
-          ),
-        ),
-        'field_image' => array(
-          LANGUAGE_NONE => array(
-            array(
-              'fid' => $fids[0],
-            ),
-          ),
-        ),
-        'uid' => 1,
-        'status' => 1,
-        'promote' => 1,
+        'body' => 'post_01',
         'type' => 'post',
-      )
-    );
-    $post->save();
-
-    // Create a third default post to display on front page.
-    $post = new Node(
-      array(
+        'promote' => '1',
+        'fid' => $fids[0],
+        'tags' => array('Backdrop CMS','Zeever','Themes'),
+      ),
+      'post_02' => array(
         'title' => st('Zeever is Open Source.'),
-        'body' => array(
-          LANGUAGE_NONE => array(
-            array(
-              'value' => '<p>' . st('Open source software is crucial because it fosters innovation, collaboration, and transparency. By allowing anyone to access, modify, and distribute the source code, open source projects empower developers to customize and improve software to meet specific needs. This collaborative approach accelerates technological advancements, reduces costs, and enhances security through community-driven reviews and contributions. Additionally, open source promotes knowledge sharing and inclusivity, enabling a diverse range of voices to participate in the software development process. Ultimately, open source software builds a foundation for a more open, equitable, and sustainable digital future.') . '</p>',
-              'format' => 'filtered_html',
-            ),
-          ),
-        ),
-        'field_image' => array(
-          LANGUAGE_NONE => array(
-            array(
-              'fid' => $fids[1],
-            ),
-          ),
-        ),
-        'uid' => 1,
-        'status' => 1,
-        'promote' => 1,
+        'body' => 'post_02',
         'type' => 'post',
-      )
+        'promote' => '1',
+        'fid' => $fids[1],
+        'tags' => array('BackdropCMS','Open Source','Zeever'),
+        'menu_parent' => 'about',
+      ),
+      'post_03' => array(
+        'title' => st("Gettings Started"),
+        'body' => 'post_03',
+        'type' => 'post',
+        'promote' => '1',
+        'fid' => $fids[2],
+        'tags' => array('User Experience','Open Source'),
+        'menu_parent' => 'about',
+      ),
     );
-    $post->save();
 
-    // Create a fourth default post to display on front page.
-    $post = new Node(
-      array(
-        'title' => st('Gettings Started'),
-        'body' => array(
-          LANGUAGE_NONE => array(
-            array(
-              'value' => '<p>' . st("Embarking on your journey with Zeever, the innovative Backdrop CMS theme designed for digital agencies, is an exciting step towards elevating your digital presence. Begin by downloading and installing Zeever from the Backdrop CMS repository. Once installed, explore the theme's intuitive customization options that allow you to tailor the design to reflect your agency's unique style and branding. Utilize the built-in layouts and flexible grid system to create stunning, responsive pages that captivate your audience. Zeever's seamless integration with Backdrop CMS ensures a smooth setup, enabling you to quickly showcase your portfolio, services, and client testimonials. Whether you're a seasoned developer or new to web design, Zeever provides the tools and flexibility needed to create a professional, engaging website that stands out in the digital landscape. Dive into the documentation and community support to make the most of Zeever's features and start building a digital experience that drives success for your agency.") . '</p>',
-              'format' => 'filtered_html',
+    // Creates an array of all new taxonony terms
+    $new_terms = array();
+    foreach ($posts as $post) {
+      $post = $post['tags'];
+      foreach ($post as $tag) {
+        if (!in_array($tag, $new_terms)) {
+          array_push($new_terms, $tag);
+        }
+      }
+    }
+
+    // Adds all new terms to 'tags' vocabulary
+    foreach ($new_terms as $new_term) {
+      $term = entity_create('taxonomy_term', array(
+        'name' => $new_term,
+        'description' => '',
+        'format' => 1,
+        'vocabulary' => 'tags',
+      ));
+      taxonomy_term_save($term);
+    }
+
+    // Create new nodes
+    foreach ($posts as $info) {
+      $content = file_get_contents($module_path . '/content/' . $info['body'] . '.txt');
+      $post = new Node(
+        array(
+          'title' => $info['title'],
+          'body' => array(
+            LANGUAGE_NONE => array(
+              array(
+                'value' => $content,
+                'format' => 'filtered_html',
+              ),
             ),
           ),
-        ),
-        'field_image' => array(
-          LANGUAGE_NONE => array(
-            array(
-              'fid' => $fids[2],
+          'field_image' => array(
+            LANGUAGE_NONE => array(
+              array(
+                'fid' => $info['fid'],
+              ),
             ),
           ),
-        ),
-        'uid' => 1,
-        'status' => 1,
-        'promote' => 1,
-        'type' => 'post',
-      )
-    );
-    $post->save();
+          'uid' => 1,
+          'promote' => $info['promote'],
+          'status' => 1,
+          'type' => $info['type'],
+        )
+      );
+
+      // Find tid for each new term and add term to node
+      $term_key = 0;
+      foreach ($info['tags'] as $post_tag) {
+        $temp_tag = taxonomy_term_load_multiple_by_name($post_tag, 'tags');
+        if (!empty($temp_tag)) {
+          $term_tid = array_keys($temp_tag);
+          $post->field_tags['und'][$term_key++]['tid'] = $term_tid[0];
+        }
+      }
+      $post->save();
+    }
+
+    // END new nodes section
+
+    // Changes to Home Layout
 
     $home_layout = layout_load('home');
     //Remove Primary Menu Block
@@ -124,19 +159,10 @@
     // Add mini-layout to footer on front page, save block details to add block
     // to other pages later.
     $home_block = $home_layout->addBlock('mini_layouts', 'footer_mini_layout', 'footer');
+    $iiv_block = $home_layout->addBlock('iivblock', 'faq_block', 'bottom');
     // Add "about" block and save block details to add additional config changes to block
     // afterwards.
-    $igb_block = $home_layout->addBlock('image_grid_block', 'about_block_with_images', 'bottom');   
-    $home_layout->save();
-    config_set('layout.layout.home', 'content.' . $igb_block->uuid . '.data.settings.label', 'About Block with Images');
-    config_set('layout.layout.home', 'content.' . $igb_block->uuid . '.data.settings.machine_name', 'about_block_with_images');
-    config_set('layout.layout.home', 'content.' . $igb_block->uuid . '.data.settings.title', 'About');
-    config_set('layout.layout.home', 'content.' . $igb_block->uuid . '.data.settings.title_display', 'custom');
-
-    // Adding correct file id's to our about block.
-    config_set('image_grid_block.block.about_block_with_images', 'image_1', $fids[3]);
-    config_set('image_grid_block.block.about_block_with_images', 'image_2', $fids[4]);
-    config_set('image_grid_block.block.about_block_with_images', 'image_3', $fids[5]);
+    $igb1_block = $home_layout->addBlock('image_grid_block', 'about_block_with_images', 'bottom');   
 
     // Remove portfolio block provided by recipe to add a different one.
     foreach ($home_layout->content as $block_id => $block_info) {
@@ -146,11 +172,45 @@
     }
     $home_layout->addBlock('views', 'portfolio_projects-block', 'content');
 
+    $home_layout->save();
+
+    // Config changes to Home layout
+    config_set('layout.layout.home', 'content.' . $igb1_block->uuid . '.data.settings.label', 'About Block with Images');
+    config_set('layout.layout.home', 'content.' . $igb1_block->uuid . '.data.settings.machine_name', 'about_block_with_images');
+    config_set('layout.layout.home', 'content.' . $igb1_block->uuid . '.data.settings.title', 'About');
+    config_set('layout.layout.home', 'content.' . $igb1_block->uuid . '.data.settings.title_display', 'custom');
+
+    config_set('layout.layout.home', 'content.' . $iiv_block->uuid . '.data.settings.label', 'FAQ Block');
+    config_set('layout.layout.home', 'content.' . $iiv_block->uuid . '.data.settings.machine_name', 'faq_block');
+    config_set('layout.layout.home', 'content.' . $iiv_block->uuid . '.data.settings.title', '');
+    config_set('layout.layout.home', 'content.' . $iiv_block->uuid . '.data.settings.title_display', 'none');
+
+    // Adding correct file id's to our about block.
+    config_set('image_grid_block.block.about_block_with_images', 'image_1', $fids[3]);
+    config_set('image_grid_block.block.about_block_with_images', 'image_2', $fids[4]);
+    config_set('image_grid_block.block.about_block_with_images', 'image_3', $fids[5]);
+    config_set('iivblock.block.faq_block', 'image', $fids[6]);
+
+    // Changes to Default Layout
+
     $default_layout = layout_load('default');
     //Remove Primary Menu Block
     $default_layout->removeBlock('13b2f325-af26-40bb-8c61-97fe1d93f19f');
     $default_block = $default_layout->addBlock('mini_layouts', 'footer_mini_layout', 'footer');
+    $default_layout->addBlock('views', 'testimonials-block_1', 'bottom');
+    $igb2_block = $default_layout->addBlock('image_grid_block', 'about_block_on_about_page', 'bottom');
     $default_layout->save();
+
+    config_set('layout.layout.default', 'content.' . $igb2_block->uuid . '.data.settings.label', 'About Block on About Page');
+    config_set('layout.layout.default', 'content.' . $igb2_block->uuid . '.data.settings.machine_name', 'about_block_on_about_page');
+    config_set('layout.layout.default', 'content.' . $igb2_block->uuid . '.data.settings.title', 'About');
+    config_set('layout.layout.default', 'content.' . $igb2_block->uuid . '.data.settings.title_display', 'none');
+    config_set('layout.layout.default', 'content.' . $igb2_block->uuid . '.data.conditions.0.plugin', 'path');
+    config_set('layout.layout.default', 'content.' . $igb2_block->uuid . '.data.conditions.0.data.settings.visibility_setting', '1');
+    config_set('layout.layout.default', 'content.' . $igb2_block->uuid . '.data.conditions.0.data.settings.paths', 'about');
+    config_set('layout.layout.default', 'content.' . $igb2_block->uuid . '.data.conditions.0.data.settings.load_condition_nojs', 'Load condition');
+
+    // Changes to Services Layout
 
     $services_layout = layout_load('services');
     //Remove Primary Menu Block
@@ -158,13 +218,14 @@
     $services_block = $services_layout->addBlock('mini_layouts', 'footer_mini_layout', 'footer');
     $services_layout->save();
 
+    // Changes to Projects Layout
+
     $project_layout = layout_load('projects');
     $projects_block = $project_layout->addBlock('mini_layouts', 'footer_mini_layout', 'footer');
     $project_layout->save();
 
 
     // Prepping new image to use in hero block of front page.
-    $module_path = backdrop_get_path('module', 'digital_agency');
     $field_image_dir = 'public://hero';
     file_prepare_directory($field_image_dir, FILE_CREATE_DIRECTORY);
     $image_url = BACKDROP_ROOT . '/' . $module_path . '/images/flamingo-background.webp';
@@ -187,7 +248,7 @@
     // Changing text and image in front page hero block.
     config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.title', 'Digital Agency Website');
     config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.image_path', '/files/hero/flamingo-background.webp');
-    config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.image', $fids[6]);
+    config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.image', $fids[7]);
     config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.content', '<a class="button" href="/contact-us">Let\'s get started!</a>');
     config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.format', 'full_html');
 

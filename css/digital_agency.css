@@ -130,3 +130,60 @@ a.button:hover {
     clear: both;
   }
 }
+
+/* IIV Block */
+
+.block-iivblock {
+
+  margin: 70px;
+}
+
+.block-iivblock h3 {
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.block-iivblock img {
+  float: right;
+}
+
+.block-iivblock img {
+  float: right;
+}
+
+.iivblock-body {
+  max-width: 400px;
+    display:  grid;
+  align-items: center;
+}
+
+.block {
+  padding: 0 0 40px 0;
+}
+
+.l-content {
+  padding-bottom:  60px;
+}
+
+.block.block-system-breadcrumb,
+.block.block-system-title-combo {
+  padding: 0;
+}
+
+/* Tags */
+
+.field-name-field-tags a,
+.views-field-field-tags a {
+  border: 1px solid grey;
+  padding: 4px 10px;
+  text-decoration: none;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.field-name-field-tags a:hover,
+.views-field-field-tags a:hover {
+  background-color: grey;
+  color: white;
+}

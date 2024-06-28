@@ -1,0 +1,20 @@
+{
+    "_config_name": "iivblock.block.faq_block",
+    "parent": "default",
+    "label": "FAQ Block",
+    "machine_name": "faq_block",
+    "title": "",
+    "content": "<h3>\r\n    <a href=\"/faq\">FAQ</a>\r\n</h3>",
+    "format": "filtered_html",
+    "image": "24",
+    "alt": "",
+    "img_title": "",
+    "link": "",
+    "link_target": "",
+    "nofollow": 0,
+    "image_style": "medium",
+    "image_align": null,
+    "image_position": "left",
+    "image_transition": "slideInLeft",
+    "content_transition": "fadeIn"
+}
