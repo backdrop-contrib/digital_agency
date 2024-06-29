@@ -120,7 +120,7 @@
         'tags' => array('User Experience','Open Source'),
       ),
       'post_04' => array(
-        'title' => st("Visting Simplo"),
+        'title' => st("Visiting Simplo"),
         'body' => 'post_04',
         'type' => 'post',
         'promote' => '1',
@@ -304,6 +304,12 @@
         $default_layout->removeBlock($block_info->uuid);
       }
     }
+    // Remove breadcrumbs block.
+    foreach ($default_layout->content as $block_id => $block_info) {
+      if ($block_info->delta == 'breadcrumb') {
+        $default_layout->removeBlock($block_info->uuid);
+      }
+    }
     $default_block = $default_layout->addBlock('mini_layouts', 'footer_mini_layout', 'footer');
     $default_layout->addBlock('views', 'testimonials-block_1', 'bottom');
     $igb2_block = $default_layout->addBlock('image_grid_block', 'about_block_on_about_page', 'bottom');
@@ -326,8 +332,14 @@
     $services_layout->removeBlock('268e9eab-a34e-4364-ba03-034e97e02ac7');
     $services_layout->removeBlock('9678bed0-2e71-4ec1-a907-7ec4480620b1');
     $services_block = $services_layout->addBlock('mini_layouts', 'footer_mini_layout', 'footer');
+    $services_layout->addBlock('views', 'services-block_1', 'bottom');
     $services_layout->addBlock('system', 'powered-by', 'footer');
-
+    // Remove breadcrumbs block.
+    foreach ($services_layout->content as $block_id => $block_info) {
+      if ($block_info->delta == 'breadcrumb') {
+        $services_layout->removeBlock($block_info->uuid);
+      }
+    }
     $services_layout->save();
 
     // Changes to Projects Layout
@@ -335,7 +347,13 @@
     $project_layout = layout_load('projects');
     $project_layout->removeBlock('dd4b5376-5919-4eea-ba2b-43dc3fad208e');
     $projects_block = $project_layout->addBlock('mini_layouts', 'footer_mini_layout', 'footer');
+    $project_layout->addBlock('views', 'portfolio_projects-block', 'bottom');
     $project_layout->addBlock('system', 'powered-by', 'footer');
+    foreach ($project_layout->content as $block_id => $block_info) {
+      if ($block_info->delta == 'breadcrumb') {
+        $project_layout->removeBlock($block_info->uuid);
+      }
+    }
     $project_layout->save();
 
 
@@ -356,7 +374,8 @@
     config_set('system.core', 'site_name', 'My Digital Agency');
     config_set('layout.layout.home', 'content.9bd5a524-3670-4922-8b12-18b00a2858b9.data.settings.block_settings.menu', 'main-menu');
     config_set('layout.layout.default', 'content.84c43df4-1165-4faf-8700-c362a7153c0b.data.settings.block_settings.menu', 'main-menu');
-    config_set('layout.layout.default', 'layout_template', 'boxton');
+    config_set('layout.layout.default', 'layout_template', 'splash');
+    config_set('layout.layout.home', 'layout_template', 'splash');
     config_set('layout.layout.services', 'content.7a914d95-dd2b-4c5b-9334-52a024a529ae.data.settings.block_settings.menu', 'main-menu');
 
     // Changing text and image in front page hero block.

@@ -3,8 +3,37 @@
  * Custom CSS for the Digital Agency package.
  */
 
-.layout--boxton .l-footer {
-  background-color: palevioletred;
+.d-agency .l-wrapper {
+  padding-bottom: 60px;
+}
+
+.l-footer.region {
+  background-color: #7E5028;
+  color:  white;
+}
+
+.l-footer.region a {
+  color: #C9B897;
+}
+
+.l-bottom.region {
+  background-color: #C9B897;
+}
+
+.front .l-top.region {
+  background-color: black;
+}
+
+.l-header.region {
+  margin:  0;
+}
+
+.l-footer.region {
+  margin:  0px;
+}
+
+.region {
+  padding-top: 20px;
 }
 
 a.button {
@@ -135,10 +164,15 @@ a.button:hover {
   }
 }
 
+.view-portfolio-projects .views-field-title h3 {
+  min-height: 3.5rem;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
 /* IIV Block */
 
 .block.block-iivblock-faq-block {
-  background-color: #d1cfcf;
   padding-top:  30px;
 }
 
@@ -203,3 +237,5 @@ a.button:hover {
   padding-top: 30px;
   margin-top: 0;
 }
+
+
