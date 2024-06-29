@@ -3,7 +3,47 @@
   function digital_agency_install() {
 
     $module_path = backdrop_get_path('module', 'digital_agency');
+    $nodes = '';
 
+    // Checking to see if "About" node still exists 
+    $query = new EntityFieldQuery();
+    $entities = $query->entityCondition('entity_type', 'node')
+      ->propertyCondition('type', 'page')
+      ->propertyCondition('title', 'About')
+      ->propertyCondition('status', 1)
+      ->range(0, 1)
+      ->execute();
+
+    if (!empty($entities['node'])) {
+      $node_ids = array_keys($entities['node']);
+      $about_nid = array_shift($node_ids);
+      $about = node_load($about_nid);
+      // If About page exists, unpublish it.
+      if ($about) {
+        $about->status = 0;
+        node_save($about);
+      }
+    }
+
+    // Checking to see if "About" node still exists 
+    $query = new EntityFieldQuery();
+    $entities = $query->entityCondition('entity_type', 'node')
+      ->propertyCondition('type', 'page')
+      ->propertyCondition('title', 'About')
+      ->propertyCondition('status', 1)
+      ->range(0, 1)
+      ->execute();
+
+    if (!empty($entities['node'])) {
+      $node_ids = array_keys($entities['node']);
+      $about_nid = array_shift($node_ids);
+      $about = node_load($about_nid);
+      // If About page exists, unpublish it.
+      if ($about) {
+        $about->status = 0;
+        node_save($about);
+      }
+    }
 
     // Checking to see if "Your first post" node still exists
     $query = new EntityFieldQuery();
@@ -15,13 +55,14 @@
       ->execute();
 
     if (!empty($entities['node'])) {
-      $about = node_load(array_shift(array_keys($entities['node'])));
-    }
-    // If default post still exists, unpublish it.
-    if (!empty($about)) {
-      $post = node_load($about->nid);
-      $post->status = '0';
-      node_save($post);
+      $node_ids = array_keys($entities['node']);
+      $about_nid = array_shift($node_ids);
+      $about = node_load($about_nid);
+      // If About page exists, unpublish it.
+      if ($about) {
+        $about->status = 0;
+        node_save($about);
+      }
     }
 
     // Prepping images for news block
@@ -53,7 +94,7 @@
       $fids[] = $file->fid;
     }
 
-    $posts = array(
+    $nodes = array(
       'post_01' => array(
         'title' => st('Zeever: A new kind of theme.'),
         'body' => 'post_01',
@@ -86,15 +127,23 @@
         'fid' => $fids[3],
         'tags' => array('User Experience','Websites', 'Backdrop CMS'),
       ),
+      'about' => array(
+        'title' => st("About"),
+        'body' => 'about',
+        'type' => 'page',
+        'promote' => '1',
+        'tags' => array('User Experience','Websites', 'Backdrop CMS'),
+      ),
     );
 
-    // Creates an array of all new taxonony terms
+    // Creates an array of all new taxonomy terms
     $new_terms = array();
-    foreach ($posts as $post) {
-      $post = $post['tags'];
-      foreach ($post as $tag) {
-        if (!in_array($tag, $new_terms)) {
-          array_push($new_terms, $tag);
+    foreach ($nodes as $node_info) {
+      if (isset($node_info['tags']) && is_array($node_info['tags'])) {
+        foreach ($node_info['tags'] as $tag) {
+          if (!in_array($tag, $new_terms)) {
+            array_push($new_terms, $tag);
+          }
         }
       }
     }
@@ -103,40 +152,66 @@
     foreach ($new_terms as $new_term) {
       $term = entity_create('taxonomy_term', array(
         'name' => $new_term,
-        'description' => '',
-        'format' => 1,
         'vocabulary' => 'tags',
       ));
       taxonomy_term_save($term);
     }
 
     // Create new nodes
-    foreach ($posts as $info) {
+    foreach ($nodes as $info) {
       $content = file_get_contents($module_path . '/content/' . $info['body'] . '.txt');
-      $post = new Node(
-        array(
-          'title' => $info['title'],
-          'body' => array(
-            LANGUAGE_NONE => array(
-              array(
-                'value' => $content,
-                'format' => 'filtered_html',
+
+      if ($info['type'] == 'post') {
+        $node = new Node(
+          array(
+            'title' => $info['title'],
+            'body' => array(
+              LANGUAGE_NONE => array(
+                array(
+                  'value' => $content,
+                  'format' => 'filtered_html',
+                ),
+              ),
+            ),
+            'field_image' => array(
+              LANGUAGE_NONE => array(
+                array(
+                  'fid' => $info['fid'],
+                ),
+              ),
+            ),
+            'uid' => 1,
+            'promote' => $info['promote'],
+            'status' => 1,
+            'type' => $info['type'],
+            'field_image' => array(
+              LANGUAGE_NONE => array(
+                array(
+                  'fid' => $info['fid'],
+                ),
               ),
             ),
           ),
-          'field_image' => array(
-            LANGUAGE_NONE => array(
-              array(
-                'fid' => $info['fid'],
+        );
+      } else {
+        $node = new Node(
+          array(
+            'title' => $info['title'],
+            'body' => array(
+              LANGUAGE_NONE => array(
+                array(
+                  'value' => $content,
+                  'format' => 'filtered_html',
+                ),
               ),
             ),
+            'uid' => 1,
+            'promote' => $info['promote'],
+            'status' => 1,
+            'type' => $info['type'],
           ),
-          'uid' => 1,
-          'promote' => $info['promote'],
-          'status' => 1,
-          'type' => $info['type'],
-        )
-      );
+        );
+      }
 
       // Find tid for each new term and add term to node
       $term_key = 0;
@@ -144,10 +219,27 @@
         $temp_tag = taxonomy_term_load_multiple_by_name($post_tag, 'tags');
         if (!empty($temp_tag)) {
           $term_tid = array_keys($temp_tag);
-          $post->field_tags['und'][$term_key++]['tid'] = $term_tid[0];
+          $node->field_tags['und'][$term_key++]['tid'] = $term_tid[0];
         }
       }
-      $post->save();
+      $node->save();
+      // Create an "About" link in the main menu.
+      if ($node->title == 'About') {
+        $item = array(
+          'link_path' => 'node/' . $node->nid,
+          'link_title' => 'About',
+          'weight' => 1,
+        );
+        menu_link_save($item);
+        // $about_mlid = $item['mlid'];
+        // While here, fix the about alias
+        $about = node_load($node->nid);
+        $about->path['auto'] = FALSE;
+        $about->path['alias'] = 'new-about';
+        $about->save();
+      }
+      // Update the menu router information.
+      menu_rebuild();
     }
 
     // END new nodes section
