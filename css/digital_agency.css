@@ -3,8 +3,8 @@
  * Custom CSS for the Digital Agency package.
  */
 
-a {
-  color: teal;
+.layout--boxton .l-footer {
+  background-color: palevioletred;
 }
 
 a.button {
@@ -137,8 +137,12 @@ a.button:hover {
 
 /* IIV Block */
 
-.block-iivblock {
+.block.block-iivblock-faq-block {
+  background-color: #d1cfcf;
+  padding-top:  30px;
+}
 
+.block-iivblock {
   margin: 70px;
 }
 
@@ -156,9 +160,10 @@ a.button:hover {
 }
 
 .iivblock-body {
-  max-width: 400px;
-    display:  grid;
+  max-width: 250px;
+  display:  grid;
   align-items: center;
+  text-align: center;
 }
 
 .block {
@@ -198,5 +203,3 @@ a.button:hover {
   padding-top: 30px;
   margin-top: 0;
 }
-
-

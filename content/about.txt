@@ -1,0 +1,12 @@
+<p>
+    The Digital Agency Recipe Package (DARP) is a collections of other Backdrop CMS recipes, custom configuration, and default content to help you spin up a fully functional website quickly. After installing DARP, you should delete unnecessary content, create your own content, and customize the site to meet your specific needs.&nbsp;
+</p>
+<p>
+    Included in this package are several other recipes which have added content and made configuration changes to your site. There is no automatic way to disable these changes other than to manually reverse or remove them. Once enabled, most recipes modules do nothing and can be disabled and removed without effecting your site.&nbsp;
+</p>
+<p>
+    The actual Digital Agency Recipe Package does provide some limited css and functionality which requires that the module remain installed and enabled. However, the intent is to leave most functionality to regular modules and styling to your theme.
+</p>
+<p>
+    This package was created by the fine folks at Simplo.site, with much input, encouragement, and support by the Backdrop CMS community. Special thanks to Joseph Flatt for all the help debugging issues and contribution of new contributed modules to support this project.
+</p>
