@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Template for the Boxton layout.
+ * Template for the Splash layout.
  *
  * Variables:
  * - $title: The page title, for use in the actual HTML content.
@@ -22,13 +22,13 @@
  *   - $content['footer']
  */
 ?>
-<div class="layout--boxton <?php print implode(' ', $classes); ?>"<?php print backdrop_attributes($attributes); ?>>
+<div class="layout--splash <?php print implode(' ', $classes); ?>"<?php print backdrop_attributes($attributes); ?>>
   <div id="skip-link">
     <a href="#main-content" class="element-invisible element-focusable"><?php print t('Skip to main content'); ?></a>
   </div>
 
   <?php if ($content['header']): ?>
-    <header class="l-header" role="banner" aria-label="<?php print t('Site header'); ?>">
+    <header class="l-header region" role="banner" aria-label="<?php print t('Site header'); ?>">
       <div class="l-header-inner container container-fluid">
         <?php print $content['header']; ?>
       </div>
@@ -37,13 +37,11 @@
 
   <div class="l-wrapper">
 
-    <?php if (!empty($content['top'])): ?>
-      <div class="l-top">
-        <?php print $content['top']; ?>
-      </div>
-    <?php endif; ?>
-
-    <div class="l-wrapper-inner container container-fluid">
+      <?php if (!empty($content['top'])): ?>
+        <div class="l-top region">
+            <?php print $content['top']; ?>
+        </div>
+      <?php endif; ?>
 
       <?php if ($messages): ?>
         <div class="l-messages" role="status" aria-label="<?php print t('Status messages'); ?>">
@@ -68,26 +66,26 @@
 
       <?php print $action_links; ?>
 
-      <div class="l-content" role="main" aria-label="<?php print t('Main content'); ?>">
-        <?php print $content['content']; ?>
+      <div class="l-content region" role="main" aria-label="<?php print t('Main content'); ?>">
+        <div class="l-content-inner container container-fluid">
+          <?php print $content['content']; ?>
+        </div>
       </div>
 
       <?php if (!empty($content['bottom'])): ?>
-        <div class="l-footer-inner container container-fluid">
-          <div class="l-bottom">
-            <?php print $content['bottom']; ?>
-          </div><!-- /.container -->
+      <div class="l-bottom region">
+        <div class="l-bottom-inner container container-fluid">         
+          <?php print $content['bottom']; ?>
         </div>
+      </div>
       <?php endif; ?>
-
-    </div><!-- /.l-wrapper-inner -->
   </div><!-- /.l-wrapper -->
 
   <?php if ($content['footer']): ?>
-    <footer class="l-footer">
+    <footer class="l-footer region">
       <div class="l-footer-inner container container-fluid">
         <?php print $content['footer']; ?>
       </div><!-- /.container -->
     </footer>
   <?php endif; ?>
-</div><!-- /.layout--boxton -->
+</div><!-- /.layout--splash -->
