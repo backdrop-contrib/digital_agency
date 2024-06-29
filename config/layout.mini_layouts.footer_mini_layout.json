@@ -112,7 +112,7 @@
                     "style": "default",
                     "block_settings": [],
                     "contexts": [],
-                    "content": "<p>\r\n    200 Whisper Willor Tree<br>\r\n    Rivendale<br>\r\n    Middle Earth, MN 44556<br>\r\n    565.334.3322<br>\r\n    &nbsp;\r\n</p>\r\n<p>\r\n    Edit these footer blocks in&nbsp;<br>\r\n    * structure &gt; mini layouts &gt; footer block.\r\n</p>",
+                    "content": "<p>\r\n    123 Elvenpath Lane<br>\r\n    Whispering Woods<br>\r\n    Rivendale, ME 55544<br>\r\n    565.334.3322<br>\r\n    &nbsp;\r\n</p>\r\n<p>\r\n    Edit these footer blocks in&nbsp;<br>\r\n    * structure &gt; mini layouts &gt; footer block.\r\n</p>",
                     "format": "filtered_html",
                     "admin_label": "Social Media Block",
                     "admin_description": ""
