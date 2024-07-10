@@ -25,26 +25,6 @@
       }
     }
 
-    // Checking to see if "About" node still exists 
-    $query = new EntityFieldQuery();
-    $entities = $query->entityCondition('entity_type', 'node')
-      ->propertyCondition('type', 'page')
-      ->propertyCondition('title', 'About')
-      ->propertyCondition('status', 1)
-      ->range(0, 1)
-      ->execute();
-
-    if (!empty($entities['node'])) {
-      $node_ids = array_keys($entities['node']);
-      $about_nid = array_shift($node_ids);
-      $about = node_load($about_nid);
-      // If About page exists, unpublish it.
-      if ($about) {
-        $about->status = 0;
-        node_save($about);
-      }
-    }
-
     // Checking to see if "Your first post" node still exists
     $query = new EntityFieldQuery();
     $entities = $query->entityCondition('entity_type', 'node')
