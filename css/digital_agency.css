@@ -46,6 +46,10 @@ a.button:hover {
   color:  black;
 }
 
+/*
+** Make Views grids, that are included in this recipe, responsive.
+*/
+
 .view .views-view-grid {
   gap: 2rem;
 }
@@ -92,7 +96,9 @@ a.button:hover {
   min-height: 70vh;
 }
 
-/* Mini Layout in footer */
+/*
+** Mini Layout in footer
+*/
 
 .l-footer .block-mini-layouts-footer-mini-layout {
     line-height: 1.7;
@@ -112,7 +118,10 @@ a.button:hover {
     padding: 0.3em 5px 0.3em 5px;
 }
 
-/* Testimonials Recipe  */
+/*
+** Testimonials Recipe  */
+*/
+
 .view-testimonials img {
   display: block;
   max-width: 150px;
@@ -145,7 +154,9 @@ a.button:hover {
   border: none;
 }
 
-/* Portfolio Projects */
+/*
+** Portfolio Projects
+*/
 
 @media (min-width: 38em) {
   .block-views-portfolio-projects-block .block-title {
@@ -170,7 +181,9 @@ a.button:hover {
   font-size: 1.2rem;
 }
 
-/* IIV Block */
+/*
+** IIV Block - FAQ block on front page
+*/
 
 .block.block-iivblock-faq-block {
   padding-top:  30px;
@@ -214,7 +227,9 @@ a.button:hover {
   padding: 0;
 }
 
-/* Tags */
+/*
+** Tags
+*/
 
 .field-name-field-tags a,
 .views-field-field-tags a {
