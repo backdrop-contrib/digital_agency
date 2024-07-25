@@ -25,6 +25,26 @@
       }
     }
 
+    // Checking to see if "About" node still exists 
+    $query = new EntityFieldQuery();
+    $entities = $query->entityCondition('entity_type', 'node')
+      ->propertyCondition('type', 'page')
+      ->propertyCondition('title', 'About')
+      ->propertyCondition('status', 1)
+      ->range(0, 1)
+      ->execute();
+
+    if (!empty($entities['node'])) {
+      $node_ids = array_keys($entities['node']);
+      $about_nid = array_shift($node_ids);
+      $about = node_load($about_nid);
+      // If About page exists, unpublish it.
+      if ($about) {
+        $about->status = 0;
+        node_save($about);
+      }
+    }
+
     // Checking to see if "Your first post" node still exists
     $query = new EntityFieldQuery();
     $entities = $query->entityCondition('entity_type', 'node')
@@ -45,7 +65,34 @@
       }
     }
 
-    // Prepping images for news block
+    $fids = [];
+
+    // Prepping images for blocks
+    $field_image_dir = 'public://blocks';
+    file_prepare_directory($field_image_dir, FILE_CREATE_DIRECTORY);
+    $block_image = array(
+      'office-chatgpt.webp',
+      'philosophy-chatgpt.webp',
+      'teamwork-chatgpt.webp',
+      'faq-chatgpt.webp',
+    );
+
+    foreach ($block_image as $image_filename) {
+      $image_url = BACKDROP_ROOT . '/' . $module_path . '/' . 'images/'. $image_filename;
+      $moved_file = file_unmanaged_copy($image_url, $field_image_dir);
+
+      $file = entity_create('file', array(
+        'filename' => $image_filename,
+        'uri' => $moved_file,
+        'uid' => 1,
+      ));
+
+      $file->save();
+      file_usage_add($file, 'file', 'file', $file->fid);
+      $fids[] = $file->fid;
+    }
+
+    // Prepping images for news nodes
     $field_image_dir = 'public://news';
     file_prepare_directory($field_image_dir, FILE_CREATE_DIRECTORY);
     $news_image = array(
@@ -53,13 +100,8 @@
       'zeever-open-source-chatgpt.webp',
       'first-post-chatgpt.webp',
       'simplo-dragon-chatgpt.webp',
-      'office-chatgpt.webp',
-      'philosophy-chatgpt.webp',
-      'teamwork-chatgpt.webp',
-      'faq-chatgpt.webp',
     );
-    $fids = [];
-
+    
     foreach ($news_image as $image_filename) {
       $image_url = BACKDROP_ROOT . '/' . $module_path . '/' . 'images/'. $image_filename;
       $moved_file = file_unmanaged_copy($image_url, $field_image_dir);
@@ -80,7 +122,7 @@
         'body' => 'post_01',
         'type' => 'post',
         'promote' => '1',
-        'fid' => $fids[0],
+        'fid' => $fids[4],
         'tags' => array('Backdrop CMS','Zeever','Themes'),
       ),
       'post_02' => array(
@@ -88,7 +130,7 @@
         'body' => 'post_02',
         'type' => 'post',
         'promote' => '1',
-        'fid' => $fids[1],
+        'fid' => $fids[5],
         'tags' => array('Backdrop CMS','Open Source','Zeever'),
       ),
       'post_03' => array(
@@ -96,7 +138,7 @@
         'body' => 'post_03',
         'type' => 'post',
         'promote' => '1',
-        'fid' => $fids[2],
+        'fid' => $fids[6],
         'tags' => array('User Experience','Open Source'),
       ),
       'post_04' => array(
@@ -104,7 +146,7 @@
         'body' => 'post_04',
         'type' => 'post',
         'promote' => '1',
-        'fid' => $fids[3],
+        'fid' => $fids[7],
         'tags' => array('User Experience','Websites', 'Backdrop CMS'),
       ),
       'about' => array(
@@ -268,10 +310,10 @@
     config_set('layout.layout.home', 'content.' . $iiv_block->uuid . '.data.settings.title_display', 'none');
 
     // Adding correct file id's to our about block.
-    config_set('image_grid_block.block.about_block_with_images', 'image_1', $fids[4]);
-    config_set('image_grid_block.block.about_block_with_images', 'image_2', $fids[5]);
-    config_set('image_grid_block.block.about_block_with_images', 'image_3', $fids[6]);
-    config_set('iivblock.block.faq_block', 'image', $fids[7]);
+    config_set('image_grid_block.block.about_block_with_images', 'image_1', $fids[0]);
+    config_set('image_grid_block.block.about_block_with_images', 'image_2', $fids[1]);
+    config_set('image_grid_block.block.about_block_with_images', 'image_3', $fids[2]);
+    config_set('iivblock.block.faq_block', 'image', $fids[3]);
 
     // Changes to Default Layout
 
@@ -349,7 +391,9 @@
       'uid' => 1,
     ));
     $file->save();
+    file_usage_add($file, 'file', 'file', $file->fid);
     $fids[] = $file->fid;
+
 
     config_set('system.core', 'site_name', 'My Digital Agency');
     config_set('layout.layout.home', 'content.9bd5a524-3670-4922-8b12-18b00a2858b9.data.settings.block_settings.menu', 'main-menu');
