@@ -46,6 +46,14 @@ a.button:hover {
   color:  black;
 }
 
+body legend {
+  font-size:  1rem;
+}
+
+body legend a {
+  margin-right: 1rem;
+}
+
 /*
 ** Make Views grids, that are included in this recipe, responsive.
 */
@@ -159,18 +167,18 @@ a.button:hover {
 */
 
 @media (min-width: 38em) {
-  .block-views-portfolio-projects-block .block-title {
+  .front .block .block-title {
     width: 50%;
     float: left;
   }
 
-  .block-views-portfolio-projects-block .view-header {
+  .front .view .view-header {
     width: 50%;
     text-align: right;
     float: right;
   }
 
-  .block-views-portfolio-projects-block .views-view-grid {
+  .front .view .views-view-grid {
     clear: both;
   }
 }
@@ -253,4 +261,19 @@ a.button:hover {
   margin-top: 0;
 }
 
+/* Comments */
 
+.comments {
+  clear: both;
+  padding-top: 2rem;
+}
+
+.comments .filter-wrapper {
+  padding: 0;
+}
+
+.comments .title {
+  font-size: 1.5rem;
+}
+
+comment

@@ -27,9 +27,9 @@
                     "type": "basic"
                 },
                 "pager": {
-                    "type": "some",
+                    "type": "none",
                     "options": {
-                        "items_per_page": "3"
+                        "offset": "0"
                     }
                 },
                 "style_plugin": "grid",
@@ -387,7 +387,46 @@
                     "title": {
                         "link_to_node": 1
                     }
-                }
+                },
+                "header": {
+                    "area": {
+                        "id": "area",
+                        "table": "views",
+                        "field": "area",
+                        "relationship": "none",
+                        "group_type": "group",
+                        "ui_name": "",
+                        "label": "",
+                        "empty": 0,
+                        "content": "<p>\r\n    <a href=\"/news\">View All</a>\r\n</p>",
+                        "format": "filtered_html",
+                        "tokenize": 0
+                    }
+                },
+                "defaults": {
+                    "header": false,
+                    "pager": false,
+                    "pager_options": false
+                },
+                "pager": {
+                    "type": "some",
+                    "options": {
+                        "items_per_page": "3",
+                        "offset": "0"
+                    }
+                },
+                "pager_options": null
+            }
+        },
+        "page_1": {
+            "display_title": "Page",
+            "display_plugin": "page",
+            "display_options": {
+                "query": {
+                    "type": "views_query",
+                    "options": []
+                },
+                "path": "news"
             }
         }
     }
