@@ -278,7 +278,7 @@
     // Remove Powered By block and then replace it later. Change order of blocks.
     $home_layout->removeBlock('d6903155-4ad7-46d3-9300-e628fd337f06');
     // Add a news block on bottom of front page
-    $home_layout->addBlock('views', 'news_block-block', 'bottom');
+    $news_block = $home_layout->addBlock('views', 'news_block-block', 'bottom');
     // Add mini-layout to footer on front page, save block details to add block
     // to other pages later.
     $home_block = $home_layout->addBlock('mini_layouts', 'footer_mini_layout', 'footer');
@@ -294,7 +294,7 @@
       }
     }
     $home_layout->addBlock('system', 'powered-by', 'footer');
-    $home_layout->addBlock('views', 'portfolio_projects-block', 'content');
+    $projects_home_block = $home_layout->addBlock('views', 'portfolio_projects-block', 'content');
 
     $home_layout->save();
 
@@ -407,7 +407,8 @@
     config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.image_path', '/files/hero/flamingo-background.webp');
     config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.image', $fids[8]);
     config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.content', '<a class="button" href="/contact-us">Let\'s get started!</a>');
-    config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.format', 'full_html');
+    config_set('layout.layout.home', 'content.'  . $projects_home_block->uuid . '.data.style.data.settings.classes', 'block-view');
+    config_set('layout.layout.home', 'content.'  . $news_block->uuid . '.data.style.data.settings.classes', 'block-view');
 
     config_set('nice_menus.settings', 'nice_menus_menu_1', 'main-menu:0');
     config_set('nice_menus.settings', 'nice_menus_depth_1', '0');

@@ -54,6 +54,14 @@ body legend a {
   margin-right: 1rem;
 }
 
+/* Hero Image */
+
+.block-layout-hero.block-hero {
+  color: white;
+  min-height: 70vh;
+}
+
+
 /*
 ** Make Views grids, that are included in this recipe, responsive.
 */
@@ -97,11 +105,6 @@ body legend a {
 .view .views-view-grid .views-grid-box {
   border:  1px solid black;
   margin-bottom:  1rem;
-}
-
-.block-layout-hero.block-hero {
-  color: white;
-  min-height: 70vh;
 }
 
 /*
@@ -167,12 +170,12 @@ body legend a {
 */
 
 @media (min-width: 38em) {
-  .front .block .block-title {
+  .front .block-view .block-title {
     width: 50%;
     float: left;
   }
 
-  .front .view .view-header {
+  .front .block-view .view-header {
     width: 50%;
     text-align: right;
     float: right;
@@ -275,5 +278,3 @@ body legend a {
 .comments .title {
   font-size: 1.5rem;
 }
-
-comment
