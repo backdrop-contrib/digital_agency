@@ -75,6 +75,7 @@
       'philosophy-chatgpt.webp',
       'teamwork-chatgpt.webp',
       'faq-chatgpt.webp',
+      'teamwork-flamingos.png',
     );
 
     foreach ($block_image as $image_filename) {
@@ -85,7 +86,7 @@
         'filename' => $image_filename,
         'uri' => $moved_file,
         'uid' => 1,
-      ));
+      )); 
 
       $file->save();
       file_usage_add($file, 'file', 'file', $file->fid);
@@ -122,7 +123,7 @@
         'body' => 'post_01',
         'type' => 'post',
         'promote' => '1',
-        'fid' => $fids[4],
+        'fid' => $fids[5],
         'tags' => array('Backdrop CMS','Zeever','Themes'),
       ),
       'post_02' => array(
@@ -130,7 +131,7 @@
         'body' => 'post_02',
         'type' => 'post',
         'promote' => '1',
-        'fid' => $fids[5],
+        'fid' => $fids[6],
         'tags' => array('Backdrop CMS','Open Source','Zeever'),
       ),
       'post_03' => array(
@@ -138,7 +139,7 @@
         'body' => 'post_03',
         'type' => 'post',
         'promote' => '1',
-        'fid' => $fids[6],
+        'fid' => $fids[7],
         'tags' => array('User Experience','Open Source'),
       ),
       'post_04' => array(
@@ -146,7 +147,7 @@
         'body' => 'post_04',
         'type' => 'post',
         'promote' => '1',
-        'fid' => $fids[7],
+        'fid' => $fids[8],
         'tags' => array('User Experience','Websites', 'Backdrop CMS'),
       ),
       'about' => array(
@@ -275,8 +276,10 @@
     $home_layout->removeBlock('fe8c7715-c7e9-46d0-8b09-09afb78b2891');
     // Remove Promoted Content Block
     $home_layout->removeBlock('578243cf-a4c8-46ad-9504-04aaf4ec9ccc');
+
     // Remove Powered By block and then replace it later. Change order of blocks.
     $home_layout->removeBlock('d6903155-4ad7-46d3-9300-e628fd337f06');
+
     // Add a news block on bottom of front page
     $news_block = $home_layout->addBlock('views', 'news_block-block', 'bottom');
     // Add mini-layout to footer on front page, save block details to add block
@@ -332,7 +335,25 @@
         $default_layout->removeBlock($block_info->uuid);
       }
     }
+
+    // Remove main content block.
+    foreach ($default_layout->content as $block_id => $block_info) {
+      if ($block_info->delta == 'main') {
+        $default_layout->removeBlock($block_info->uuid);
+      }
+    }
+
+    $default_layout->addBlock('system', 'page_components:tabs', 'content');
+
     $default_block = $default_layout->addBlock('mini_layouts', 'footer_mini_layout', 'footer');
+    $smart_block = $default_layout->addBlock('smart_blocks', 'SmartBlocksHeroBlock', 'top'); 
+    $default_layout->addBlock('system', 'main', 'content'); 
+
+       
+
+    //Remove Title Block
+    $default_layout->removeBlock('a549d0bc-51f7-46b0-9b41-653788410dd4');
+
     $default_layout->addBlock('views', 'testimonials-block_1', 'bottom');
     $igb2_block = $default_layout->addBlock('image_grid_block', 'about_block_on_about_page', 'bottom');
     $default_layout->addBlock('system', 'powered-by', 'footer');
@@ -346,6 +367,11 @@
     config_set('layout.layout.default', 'content.' . $igb2_block->uuid . '.data.conditions.0.data.settings.visibility_setting', '1');
     config_set('layout.layout.default', 'content.' . $igb2_block->uuid . '.data.conditions.0.data.settings.paths', 'about');
     config_set('layout.layout.default', 'content.' . $igb2_block->uuid . '.data.conditions.0.data.settings.load_condition_nojs', 'Load condition');
+
+    config_set('layout.layout.default', 'content.' . $smart_block->uuid . '.data.settings.title_display', 'page_title');
+    config_set('layout.layout.default', 'content.' . $smart_block->uuid . '.data.settings.image', $fids[4]);
+    config_set('layout.layout.default', 'content.' . $smart_block->uuid . '.data.settings.image_path', '/files/blocks/teamwork-flamingos.png');
+    config_set('layout.layout.default', 'settings.title_display', 'none');
 
     // Changes to Services Layout
 
@@ -405,7 +431,7 @@
     // Changing text and image in front page hero block.
     config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.title', 'Digital Agency Website');
     config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.image_path', '/files/hero/flamingo-background.webp');
-    config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.image', $fids[8]);
+    config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.image', $fids[9]);
     config_set('layout.layout.home', 'content.094cbc03-d088-4b3c-8361-977733540ae8.data.settings.content', '<a class="button" href="/contact-us">Let\'s get started!</a>');
     config_set('layout.layout.home', 'content.'  . $projects_home_block->uuid . '.data.style.data.settings.classes', 'block-view');
     config_set('layout.layout.home', 'content.'  . $news_block->uuid . '.data.style.data.settings.classes', 'block-view');

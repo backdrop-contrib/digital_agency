@@ -25,6 +25,8 @@ dependencies[] = testimonial_recipe
 dependencies[] = testimonial_recipe:testimonial_sample_content
 dependencies[] = image_grid_block
 dependencies[] = iivblock
+dependencies[] = smart_blocks
+
 
 ; Find suggested tags at: https://docs.backdropcms.org/documentation/module-packages-and-tags
 tags[] = Recipes

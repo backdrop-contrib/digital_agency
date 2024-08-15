@@ -35,13 +35,15 @@
     </header>
   <?php endif; ?>
 
+  <?php if (!empty($content['top'])): ?>
+    <div class="l-top region">
+        <?php print $content['top']; ?>
+    </div>
+  <?php endif; ?>
+
   <div class="l-wrapper">
 
-      <?php if (!empty($content['top'])): ?>
-        <div class="l-top region container container-fluid">
-            <?php print $content['top']; ?>
-        </div>
-      <?php endif; ?>
+
 
       <?php if ($messages): ?>
         <div class="l-messages" role="status" aria-label="<?php print t('Status messages'); ?>">

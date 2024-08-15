@@ -24,16 +24,20 @@
   background-color: black;
 }
 
+.region .container {
+  padding-top: 20px;
+}
+
+.l-header.region .container {
+  padding-top: 0px;
+}
+
 .l-header.region {
   margin:  0;
 }
 
 .l-footer.region {
   margin:  0px;
-}
-
-.region {
-  padding-top: 20px;
 }
 
 a.button {
@@ -61,6 +65,20 @@ body legend a {
   min-height: 70vh;
 }
 
+.l-top .block-hero {
+  height: 400px;
+}
+
+.block-smart-blocks-smartblocksheroblock h2.block-title {
+  display: block;
+  text-align: center;
+  font-weight: 900;
+  margin: 0 auto;
+  padding: 20px;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  width: max-content;
+}
 
 /*
 ** Make Views grids, that are included in this recipe, responsive.
