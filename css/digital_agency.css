@@ -128,7 +128,7 @@ body legend a {
 .view .views-view-grid-cols-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3 equal-width columns */
-  gap: 10px 35px; /* Space between the blocks */
+  gap: 25px; /* Space between the blocks */
 }
 
 .views-view-grid-cols-3 .views-grid-box {

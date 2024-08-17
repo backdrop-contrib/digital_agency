@@ -10,7 +10,6 @@
 function digital_agency_theme_registry_alter(&$theme_registry) {
   // Defined path to the current module's 'templates' directory.
   $module_path = backdrop_get_path('module', 'digital_agency') . '/templates';
-
   // Find all *.tpl.php files in this module's 'templates' folder recursively.
   $template_file_objects = backdrop_find_theme_templates($theme_registry, '.tpl.php', $module_path);
 
@@ -26,3 +25,6 @@ function digital_agency_theme_registry_alter(&$theme_registry) {
   }
 }
 
+function digital_agency_preprocess_page(&$variables) {
+  $variables['classes'][] = 'digital-agency';
+}
