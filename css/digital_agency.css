@@ -67,6 +67,7 @@ body legend a {
 
 .l-top .block-hero {
   height: 400px;
+  margin-bottom: 0;
 }
 
 .block-smart-blocks-smartblocksheroblock h2.block-title {
@@ -78,6 +79,10 @@ body legend a {
   color: white;
   background: rgba(0, 0, 0, 0.5);
   width: max-content;
+}
+
+.block.block-system-messages.contextual-links-region {
+  padding: 0;
 }
 
 /*
@@ -120,9 +125,49 @@ body legend a {
   }
 }
 
-.view .views-view-grid .views-grid-box {
-  border:  1px solid black;
-  margin-bottom:  1rem;
+.view .views-view-grid-cols-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal-width columns */
+  gap: 10px 35px; /* Space between the blocks */
+}
+
+.views-view-grid-cols-3 .views-grid-box {
+  display: contents; /* Makes the children of this element act as direct children of the grid container */
+}
+
+.view-portfolio-projects .views-view-grid-cols-3 .views-grid-box {
+  display: grid;
+  grid-template-rows: auto auto auto; /* 3 rows inside each block */
+}
+
+.views-grid-box {
+  column-span: 1;
+}
+
+.views-view-grid-cols-3 .views-grid-box {
+  border: 1px solid green;
+  box-sizing: border-box;
+}
+
+/* Explicitly assign items to their respective rows */
+.views-view-grid-cols-3 .views-grid-box > .views-field:nth-child(1) {
+  grid-column: span 1; /* Each item takes up one column */
+  grid-row: 1; /* Place item-1 in the first row */
+}
+
+.views-view-grid-cols-3 .views-grid-box > .views-field:nth-child(2) {
+  grid-column: span 1;
+  grid-row: 2; /* Place item-2 in the second row */
+}
+
+.views-view-grid-cols-3 .views-grid-box > .views-field:nth-child(3) {
+  grid-column: span 1;
+  grid-row: 3; /* Place item-3 in the third row */
+}
+
+.views-view-grid-cols-3 .views-grid-box > .views-field:nth-child(4) {
+  grid-column: span 1;
+  grid-row: 4; /* Place item-3 in the third row */
 }
 
 /*
@@ -148,7 +193,7 @@ body legend a {
 }
 
 /*
-** Testimonials Recipe  */
+** Testimonials Recipe 
 */
 
 .view-testimonials img {
@@ -295,4 +340,13 @@ body legend a {
 
 .comments .title {
   font-size: 1.5rem;
+}
+
+/*  Services Recipe */
+
+.views-field-field-services-image img {
+  max-width: 150px;
+  display: block;
+  margin-left:  auto;
+  margin-right: auto;
 }
