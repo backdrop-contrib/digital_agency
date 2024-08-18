@@ -32,8 +32,16 @@
   padding-top: 0px;
 }
 
+.block.block-system-header {
+  padding: 0;
+}
+
 .l-header.region {
   margin:  0;
+}
+
+body .l-header-inner {
+/*  min-height: 10px;*/
 }
 
 .l-footer.region {
