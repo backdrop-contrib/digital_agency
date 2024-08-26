@@ -414,11 +414,6 @@
         $project_layout->removeBlock($block_info->uuid);
       }
     }
-    foreach ($project_layout->content as $block_id => $block_info) {
-      if ($block_info->delta == 'main-menu') {
-        $project_layout->removeBlock($block_info->uuid);
-      }
-    }
     $project_layout->save();
 
 

@@ -27,4 +27,5 @@ function digital_agency_theme_registry_alter(&$theme_registry) {
 
 function digital_agency_preprocess_page(&$variables) {
   $variables['classes'][] = 'digital-agency';
+  backdrop_add_icons(array('quotes'));
 }
