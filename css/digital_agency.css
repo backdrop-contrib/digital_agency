@@ -12,6 +12,15 @@
   color:  white;
 }
 
+#layout-edit-main .region {
+  background-color: #fafafa;
+  color:  black;
+}
+
+#layout-edit-main .region a {
+  color: #0074bd;
+}
+
 .l-footer.region a {
   color: #C9B897;
 }
