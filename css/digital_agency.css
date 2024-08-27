@@ -3,6 +3,16 @@
  * Custom CSS for the Digital Agency package.
  */
 
+/* Fixing problem with Basis */
+
+body .l-top .block-hero {
+  margin-top: 0;
+}
+
+body .l-header-inner {
+  min-height: 5.125rem;
+}
+
 .d-agency .l-wrapper {
   padding-bottom: 60px;
 }
@@ -334,6 +344,10 @@ body legend a {
 
 .block {
   padding: 0 0 40px 0;
+}
+
+.block-system-header {
+  padding: 0;
 }
 
 .l-content {
