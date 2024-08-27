@@ -386,3 +386,10 @@ body legend a {
   margin-left:  auto;
   margin-right: auto;
 }
+
+/* Centering status messages in region without .container */
+
+.l-messages {
+  max-width: 1178px;
+  margin: 0 auto;
+}
