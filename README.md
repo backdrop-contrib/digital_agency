@@ -13,6 +13,8 @@ by the [Zeever theme](https://github.com/backdrop-contrib/zeever/wiki). The Zeev
 and configuration in mind. However, we choose a different name for this project to 
 reflect the fact, that more than one theme might choose to support this package.
 
+![Screenshot of the full profile](https://raw.githubusercontent.com/backdrop-contrib/digital_agency/1.x-1.x/screenshots/digital-agency.webp)
+
 Requirements
 ------------
 
